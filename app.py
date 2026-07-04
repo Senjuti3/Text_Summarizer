@@ -6,7 +6,9 @@ torch.set_grad_enabled(False)
 torch.set_num_threads(1)
 torch.set_num_interop_threads(1)
 import re
-import gc 
+import gc
+import logging
+logging.getLogger("huggingface_hub").setLevel(logging.ERROR) 
 from fastapi.templating import Jinja2Templates # UI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
