@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IPynb / Jupyter
+.ipynb_checkpoints/
+.virtual_documents/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+conda-env/
+
+# Large Model weights (T5 / HuggingFace model saved locally)
+saved_summary_model/
+
+# Datasets / Large CSV files
+samsum-*.csv
+*.csv
+
+# OS generated files
+.DS_Store
+Thumbs.db
