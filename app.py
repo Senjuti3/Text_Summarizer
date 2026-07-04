@@ -2,6 +2,8 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 import torch
+torch.set_grad_enabled(False)
+torch.set_num_threads(1)
 import re 
 from fastapi.templating import Jinja2Templates # UI
 from fastapi.responses import HTMLResponse
