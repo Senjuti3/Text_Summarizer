@@ -7,10 +7,18 @@ from fastapi.templating import Jinja2Templates # UI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
+import os
+
 app = FastAPI(title="Text Summarizer App", description="Text Summarization using T5", version="1.0")
 
-model = T5ForConditionalGeneration.from_pretrained("./saved_summary_model")
-tokenizer = T5Tokenizer.from_pretrained("./saved_summary_model")
+MODEL_PATH = os.getenv("MODEL_PATH", "./saved_summary_model")
+
+if not os.path.exists(MODEL_PATH) and MODEL_PATH == "./saved_summary_model":
+    print("Warning: Local model path './saved_summary_model' not found. Falling back to default 't5-small'.")
+    MODEL_PATH = "t5-small"
+
+model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
+tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
 
 # device
 if torch.backends.mps.is_available():
