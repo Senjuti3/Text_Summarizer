@@ -24,7 +24,7 @@ if not os.path.isfile(os.path.join(MODEL_PATH, "config.json")) and MODEL_PATH ==
     print("Warning: Local model config not found. Falling back to Hugging Face repository 'Senjuti3/my-t5-summarizer'.")
     MODEL_PATH = "Senjuti3/my-t5-summarizer"
 
-model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
+model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH, low_cpu_mem_usage=True, torch_dtype=torch.bfloat16)
 tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
 
 # device
