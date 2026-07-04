@@ -13,9 +13,10 @@ app = FastAPI(title="Text Summarizer App", description="Text Summarization using
 
 MODEL_PATH = os.getenv("MODEL_PATH", "./saved_summary_model")
 
-if not os.path.exists(MODEL_PATH) and MODEL_PATH == "./saved_summary_model":
-    print("Warning: Local model path './saved_summary_model' not found. Falling back to default 't5-small'.")
-    MODEL_PATH = "t5-small"
+# Check if config.json exists locally; if not, fallback to Hugging Face repository
+if not os.path.isfile(os.path.join(MODEL_PATH, "config.json")) and MODEL_PATH == "./saved_summary_model":
+    print("Warning: Local model config not found. Falling back to Hugging Face repository 'Senjuti3/my-t5-summarizer'.")
+    MODEL_PATH = "Senjuti3/my-t5-summarizer"
 
 model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
 tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
