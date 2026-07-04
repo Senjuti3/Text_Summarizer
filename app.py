@@ -13,6 +13,10 @@ app = FastAPI(title="Text Summarizer App", description="Text Summarization using
 
 MODEL_PATH = os.getenv("MODEL_PATH", "./saved_summary_model")
 
+# If MODEL_PATH is a full URL, strip the huggingface prefix to extract the repository ID
+if MODEL_PATH.startswith("https://huggingface.co/"):
+    MODEL_PATH = MODEL_PATH.replace("https://huggingface.co/", "")
+
 # Check if config.json exists locally; if not, fallback to Hugging Face repository
 if not os.path.isfile(os.path.join(MODEL_PATH, "config.json")) and MODEL_PATH == "./saved_summary_model":
     print("Warning: Local model config not found. Falling back to Hugging Face repository 'Senjuti3/my-t5-summarizer'.")
