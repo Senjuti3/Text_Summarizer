@@ -61,7 +61,7 @@ Since the fine-tuned T5 model files (~242MB) are ignored by git (due to large fi
 ### 2. Render Settings
 When creating a new **Web Service** on Render:
 - **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `gunicorn -w 1 -k uvicorn.workers.UvicornWorker app:app -b 0.0.0.0:$PORT` (uses 1 worker to fit Render's 512MB RAM limit)
+- **Start Command**: `uvicorn app:app --host 0.0.0.0 --port $PORT` (runs as a single process to save memory on Render's 512MB RAM limit)
 
 ---
 

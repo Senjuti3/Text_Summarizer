@@ -4,7 +4,9 @@ from transformers import T5ForConditionalGeneration, T5Tokenizer
 import torch
 torch.set_grad_enabled(False)
 torch.set_num_threads(1)
-import re 
+torch.set_num_interop_threads(1)
+import re
+import gc 
 from fastapi.templating import Jinja2Templates # UI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -26,6 +28,7 @@ if not os.path.isfile(os.path.join(MODEL_PATH, "config.json")) and MODEL_PATH ==
 
 model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH, low_cpu_mem_usage=True, torch_dtype=torch.bfloat16)
 tokenizer = T5Tokenizer.from_pretrained(MODEL_PATH)
+gc.collect()
 
 # device
 if torch.backends.mps.is_available():
